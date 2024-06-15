@@ -1,0 +1,35 @@
+.similar-container{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    height: 15%;
+    margin-bottom: 15px;
+    text-decoration: none;
+}
+
+.similar-poster{
+    width: 117px;
+    height: 100%;
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.3));
+    margin-right: 15px;
+}
+
+.similar-detail{
+    color: var(--light-font);
+    width: 65%;
+    height: 175px;
+}
+
+#similar-movie-title, #similar-genres{
+    margin-bottom: 25px;
+}
+
+#similar-genres{
+    padding: 0 5px 0 5px;
+}
+
+#similar-genre-item{
+    font-size: 12px;
+    padding: 1% 2% 1% 2%;
+}

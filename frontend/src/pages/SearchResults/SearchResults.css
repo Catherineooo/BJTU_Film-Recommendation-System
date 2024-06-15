@@ -1,0 +1,13 @@
+.search-result{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 6.5% 0 6.5%;
+}
+
+.search-keyword{
+    font-size: 24px;
+    color: var(--light-font);
+    margin-left: 16px;
+}

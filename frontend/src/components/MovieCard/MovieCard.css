@@ -1,0 +1,59 @@
+.movie-card{
+    width: 225px;
+    height: fit-content;
+    border-radius: 20px;
+    background: var(--grey-bg);
+    backdrop-filter: blur(5px); /* Apply a blur effect */
+    -webkit-backdrop-filter: blur(5px); /* For Safari compatibility */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    padding: 8px 8px 10px 8px;
+}
+
+.movie-link{
+    text-decoration: none;
+    color: white;
+}
+
+.movie-card img{
+    width: 225px;
+    height: 300px;
+    object-fit: fill;
+    border-radius: 12px;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+}
+
+.movie-title{
+    color: white;
+    font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 0 5px 0 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.movie-subtitle{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 5px;
+    padding: 0 5px 0 5px;
+    color: var(--light-font);
+}
+
+.rating{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 40px;
+}
+
+.star-icon{
+    font-size: 18px;
+    color: var(--star-icon);
+    margin-top: 2px;
+    margin-left: 4px;
+}
