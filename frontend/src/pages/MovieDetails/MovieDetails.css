@@ -1,0 +1,196 @@
+.detail-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: auto;
+    padding: 25px 6.5% 3% 6.5%;
+}
+
+.detail-left {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.detail-video {
+    width: auto;
+    height: 490px;
+    padding: 0 25px 0 0;
+    margin-bottom: 25px;
+}
+
+.video-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 12px;
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.3));
+}
+
+.detail-left-top {
+    width: 100%;
+    height: 353px;
+    display: flex;
+}
+
+.poster-container {
+    position: relative;
+    display: inline-block;
+    width: 28%;
+}
+
+.detail-poster {
+    display: block;
+    border-radius: 12px;
+    height: 100%;
+    width: 100%;
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.3));
+}
+
+.fav-btn {
+    height: 43px;
+    width: 43px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    color: var(--light-font);
+    background-color: rgba(0, 0, 0, 0.5);
+    /* semi-transparent background */
+    border: none;
+    border-radius: 7px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.fav-btn:hover{
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.heart-icon{
+    margin-top: 2px;
+    width: 24px;
+    height: 24px;
+}
+
+.detail-container {
+    display: block;
+    width: 72%;
+    height: 100%;
+    color: var(--light-font);
+    padding: 0 25px 0 25px;
+}
+
+.detail-container h1 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.movie-overview {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    /* Change this to the number of lines you want to show */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: justify;
+    margin-top: 5px;
+    margin-bottom: 25px;
+}
+
+.movie-date,
+.movie-rating {
+    margin-bottom: 25px;
+}
+
+.movie-detail-rating {
+    color: var(--star-icon);
+}
+
+.detail-review {
+    height: 60%;
+}
+
+.review-section {
+    padding: 25px 25px 0 0;
+}
+
+.review-section h2 {
+    margin: 0;
+    color: white;
+    margin-bottom: 25px;
+}
+
+.detail-right {
+    width: 30%;
+    height: fit-content;
+}
+
+.detail-right h2 {
+    margin: 0;
+    color: white;
+    margin-bottom: 25px;
+}
+
+.genres {
+    margin-bottom: 25px;
+}
+
+.genre-item {
+    text-align: center;
+    background-color: var(--grey-bg);
+    margin-right: 12px;
+    padding: 2px 12px 2px 12px;
+}
+
+.trailer-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--blue-bg);
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.trailer-btn:hover {
+    background: var(--blue-bg-hover);
+}
+
+.trailer-btn:active {
+    background: var(--blue-bg-hover);
+}
+
+.play-icon {
+    width: 20px;
+    height: 20px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    margin-top: 1.5px;
+    margin-right: 3px;
+}
+
+.no-reviews {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--grey-bg);
+    color: white;
+    width: 100%;
+    height: 185px;
+    border-radius: 12px;
+}
+
+.no-reviews img {
+    object-fit: cover;
+}
+
+.comment-icon {
+    font-size: 54px;
+    margin-bottom: 2px;
+}

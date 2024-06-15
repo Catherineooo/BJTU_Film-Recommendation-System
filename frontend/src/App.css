@@ -1,0 +1,19 @@
+:root{
+    --background:#090b21;
+    --btn-black: #19242b;
+    --glassy-bg: rgba(65, 65, 65, 0.308);
+    --grey-bg: rgba(255, 255, 255, 0.2);
+    --light-font: rgba(255, 255, 255, 0.7);
+    --star-icon: #fba80b;
+    --blue-font: #00c0ff;
+    --blue-bg: #3498db;
+    --blue-bg-hover: #2980b9 ;
+    --red-btn: #d32029;
+    --red-btn-hover: #e84749;
+    --blue-gradient: linear-gradient(135deg, #1dc4e9 0%, #1de9b6  100%);
+    --blue-gradient-hover: linear-gradient(135deg, #16a4c8 0%, #16c89a 100%);
+}
+
+body{
+    background: var(--background);
+}

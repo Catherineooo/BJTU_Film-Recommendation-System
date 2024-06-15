@@ -1,0 +1,93 @@
+.favourite-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 6.5% 0 6.5%;
+}
+
+.favourite-container {
+    display: flex;
+    height: fit-content;
+    width: 100%;
+}
+
+.favourite-list {
+    display: block;
+    height: fit-content;
+    width: 100%;
+}
+
+.favourite-card {
+    width: 100%;
+    height: 200px;
+    border-radius: 12px;
+    background-color: var(--grey-bg);
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0px;
+    table-layout: auto;
+}
+
+th,
+td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 8px;
+    text-align: left;
+    color: var(--light-font);
+    border-bottom: 1px solid var(--grey-bg);
+    font-size: 14px;
+}
+
+th {
+    cursor: pointer;
+    border-top: 2px solid var(--grey-bg);
+    background-color: var(--card_black);
+    position: sticky;
+    top: -8.5px;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.1499px;
+    line-height: 20.02px;
+}
+
+tr {
+    height: 100%;
+}
+
+
+.rating-col,
+.more-col {
+    width: 5%;
+}
+
+.date-col {
+    width: 10%;
+}
+
+.rating-cell {
+    color: var(--blue-font);
+}
+
+.rating-cell div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fav-star {
+    margin-top: 2px;
+    margin-left: 3px;
+}
+
+.fav-more-btn {
+    background-color: transparent;
+    border: none;
+    color: var(--light-font);
+    cursor: pointer;
+}

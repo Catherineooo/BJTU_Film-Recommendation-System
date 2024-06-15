@@ -1,0 +1,82 @@
+#favCard{
+    width: fit-content;
+    padding: 20px;
+}
+
+#favCardContainer::before {
+    width: 100px;
+    height: 100px;
+    content: "";
+    position: absolute;
+    background-color: transparent;
+    z-index: -1;
+    border-radius: 50%;
+    left: 100px;
+    top: 50px;
+    transition: all 1s;
+}
+
+#favCardContainer:hover::before {
+    transform: translate(0, 50px);
+}
+
+.fav-poster {
+    height: 250px;
+    border-radius: 12px;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+}
+
+.fav-input {
+    width: fit-content;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+/* Additional styling to make input look consistent */
+input[type=number] {
+    appearance: textfield;
+    width: 24px;
+    height: 24px;
+    /* Adjust as needed */
+    padding: 7px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.fav-footer{
+    width: 100%;
+}
+
+.fav-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.fav-rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fav-rating span {
+    color: var(--blue-font);
+    margin-left: 5px;
+}
+
+#add-btn{
+    width: 100%;
+}
