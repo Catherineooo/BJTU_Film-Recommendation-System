@@ -24,20 +24,23 @@ function Signup({ signupVisible, toggleSignupVisible, toggleLoginVisible }) {
 	const handleSignup = async (e) => {
 		e.preventDefault();
 		try {
-			const response = await axios.post(`${process.env.BACKEND_API_URL}/signup`, {
-				username,
-				password,
+			const response = await axios.post('http://localhost:8000/register', {//`${process.env.VUE_APP_BACKEND_API_URL}/signup`
+				username: username,
+				password: password,
 			});
-			if (response.data.message === '注册成功') {
+            console.log(response)
+			if (response.data.data.state === 1) {
+                console.log("注册成功")
 				handleLoginVisible();
 			} else {
-				setErrormsg(response.data.message);
+                console.log("注册失败")
+				setErrormsg(response.data.data.message);
 			}
 		} catch (error) {
 			if (error.response && error.response.status === 400) {
-				setErrormsg(error.response.data.message);
+				setErrormsg(error.response.data.data.message);
 			} else {
-				setErrormsg('An unexpected error occurred. Please try again.');
+				setErrormsg('阿哦 出错了喵');
 			}
 		}
 	};

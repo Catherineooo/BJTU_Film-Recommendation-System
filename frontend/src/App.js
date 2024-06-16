@@ -26,8 +26,8 @@ function App() {
       const token = localStorage.getItem('token');
       if (!token) {
         console.log('No token found.');
-      }
-      const url = `${process.env.BACKEND_API_URL}/login/success`;
+      }//VUE_APP_BACKEND_API_URL
+      const url = `${process.env.VUE_APP_BACKEND_API_URL}/login/success`;
       const { data } = await axios.post(url, {
         token,
       });

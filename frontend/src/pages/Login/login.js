@@ -11,17 +11,21 @@ function Login({ loginVisible, toggleLoginVisible, toggleSignupVisible }) {
 
 	const handleLogin = async (e) => {
 		e.preventDefault();
+        console.log("login u="+ username + ' p='+ password)
 		try {
-			const response = await axios.post(`${process.env.BACKEND_API_URL}/auth/login`, {
+			const response = await axios.post('http://localhost:8000/login', {//`${process.env.VUE_APP_BACKEND_API_URL}/login`
 				username: username,
 				password,
 			});
-			if (response.data.message === '登录成功') {
+            console.log(response)
+			if (response.data.data.state === 1) {
+                console.log("登录成功")
 				const token = response.data.token;
 				localStorage.setItem('token', token); // Store token in localStorage
 				console.log(response.data);
 				window.location = '/';
 			} else {
+                console.log("登录失败")
 				toast.info(response.data.message, {
 					position: 'top-center',
 					autoClose: 1500,
