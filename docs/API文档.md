@@ -25,7 +25,7 @@
             "user": {
                 "id": 1,
                 "username": "admin",
-                "token": "token"
+                "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlkIjoxLCJleHAiOjE3MTg1NDM1ODUsImlhdCI6MTcxODUwNzU4NSwidXNlcm5hbWUiOiJhZG1pbiJ9.6NYCUsycAUchWsikTEXUljwGttHBEd_oOkuNhpWc_SE"
             }
         }
     }
@@ -119,13 +119,57 @@
     }
     ```
 
+## 搜索相关
+
+直接调别人的api谢谢
+
+
+
 ## 推荐相关
 
-### 3. 根据id推荐电影 [GET]
+### 4. 根据id推荐电影 [GET]
 
 调drj的接口
 
-### 4. 冷启动[GET]
+* url：/movie/recommend
+
+* data：
+
+  * id：string
+  * token: string
+
+* response：
+
+  * 成功
+
+    ```json
+    {
+        "code": 200,
+        "data": {
+            "state": 1,
+            "message": "查询成功",
+            "movies": ["tt0114885", "tt0114886", "tt0114888"]
+            }
+        }
+    }
+    ```
+
+  * 失败
+
+    ```json
+    {
+        "code": 401,
+        "data": {
+            "state": 0,
+            "message": "xxx"
+            }
+        }
+    }
+    ```
+
+    
+
+### 5. 冷启动[GET]
 
 就是没有用户数据的时候，推荐一些比较热门的电影
 
@@ -133,7 +177,7 @@
 
 ## 打分
 
-### 5. 用户给电影打分[POST]
+### 6. 用户给电影打分[POST]
 
 
 
@@ -149,12 +193,3 @@
 | username | string | 不能重复                             |
 | password | string | **加密存储**，前端加密处理再发给后端 |
 
-### 2. 电影表
-
-| 属性名 | 类型         | 备注            |
-| ------ | ------------ | --------------- |
-| id     | int          | 主键，默认自增1 |
-| title  | varchar(100) | 电影名          |
-| genres | varchar(100) | 类型            |
-
-还没写完 不想写了 先写个登陆注册吧。。。
