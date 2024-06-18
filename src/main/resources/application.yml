@@ -11,8 +11,11 @@ spring:
 
   datasource:
     username: root
-    password: 123456
-    url: jdbc:mysql://localhost:3306/movie_web?serverTimezone=UTC
+    password: 29b04a92fb1a47f6
+    url: jdbc:mysql://47.94.12.125:3306/movie_web?serverTimezone=UTC
+#    username: root
+#    password: 123456
+#    url: jdbc:mysql://:3306/movie_web?serverTimezone=UTC
 
     driver-class-name: com.mysql.cj.jdbc.Driver
 
@@ -30,3 +33,9 @@ spring:
       exclude: WEB-INF/**
     freemarker:
       cache: false    #页面不加载缓存，修改即时生效
+vertx:
+  disableDnsResolver: true
+
+java:
+  net:
+    preferIPv4Stack: true
