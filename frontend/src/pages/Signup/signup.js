@@ -1,8 +1,9 @@
 //signup.js
 import React, { useState, useEffect } from "react";
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
+import { encoder } from "../../utils/passwordUtil";
 
 function Signup({ signupVisible, toggleSignupVisible, toggleLoginVisible }) {
 	const [username, setUsername] = useState('');
@@ -23,24 +24,28 @@ function Signup({ signupVisible, toggleSignupVisible, toggleLoginVisible }) {
 
 	const handleSignup = async (e) => {
 		e.preventDefault();
+		const hashedPassword = encoder(password);
 		try {
-			const response = await axios.post('http://localhost:8000/register', {//`${process.env.VUE_APP_BACKEND_API_URL}/signup`
+			const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/register`, {
 				username: username,
-				password: password,
+				password: hashedPassword,
 			});
-            console.log(response)
 			if (response.data.data.state === 1) {
-                console.log("注册成功")
 				handleLoginVisible();
+				toast.success(response.data.data.message, {
+					position: 'top-center',
+					autoClose: 1500,
+					hideProgressBar: true,
+					closeButton: false
+				});
 			} else {
-                console.log("注册失败")
 				setErrormsg(response.data.data.message);
 			}
 		} catch (error) {
 			if (error.response && error.response.status === 400) {
-				setErrormsg(error.response.data.data.message);
+				setErrormsg(error.response.data.message);
 			} else {
-				setErrormsg('阿哦 出错了喵');
+				setErrormsg('An unexpected error occurred. Please try again.');
 			}
 		}
 	};
@@ -60,12 +65,11 @@ function Signup({ signupVisible, toggleSignupVisible, toggleLoginVisible }) {
 
 	return (
 		<>
-			<ToastContainer />
 			{signupVisible && (
 				<div className="auth-bg" onClick={handleSignupVisible}>
-					<div class="cardContainer" onClick={handleContainerClick}>
-						<div class="card">
-							<p class="auth-title">SIGN UP</p>
+					<div className="cardContainer" onClick={handleContainerClick}>
+						<div className="card">
+							<p className="auth-title">SIGN UP</p>
 							<form className="signup-form" onSubmit={handleSignup}>
 								<input type="text" className="auth-input" name="username" onChange={(e) => setUsername(e.target.value)} placeholder="Username" required />
 								<input

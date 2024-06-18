@@ -14,6 +14,7 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import BackToTop from './components/BackToTop/backToTop';
 import './App.css';
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -26,12 +27,13 @@ function App() {
       const token = localStorage.getItem('token');
       if (!token) {
         console.log('No token found.');
-      }//VUE_APP_BACKEND_API_URL
-      const url = `${process.env.VUE_APP_BACKEND_API_URL}/login/success`;
+        return;
+      }
+      const url = `${process.env.REACT_APP_BACKEND_URL}/login/success`;
       const { data } = await axios.post(url, {
         token,
       });
-      setUser(data.user);
+      setUser(data.data.user);
     } catch (err) {
       console.log('Error getting user:', err);
     }
@@ -63,10 +65,11 @@ function App() {
 
   return (
     <Router>
+      <ToastContainer />
       <Header userDetails={{ user }} toggleProfileVisible={toggleProfileVisible} toggleLoginVisible={toggleLoginVisible} />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/movie/:obj/:id" element={<MovieDetails user={ user } />} />
+        <Route path="/movie/:obj/:id" element={<MovieDetails user={ user } toggleLoginVisible={toggleLoginVisible} />} />
         <Route path="/search" element={<SearchResults />} />
         <Route path="/movies/:type/:id" element={<MovieLists />} />
         <Route path="/favourite" element={<Favourite userDetail={ user } />} />

@@ -1,25 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+import React, { useState, useEffect, useRef } from 'react';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import './FavCard.css';
 
-function FavCard({ userDetail, movie, favCardVisible, toggleFavCardVisible }) {
+function FavCard({ id, userDetail, movie, favCardVisible, toggleFavCardVisible }) {
     const user = userDetail;
     const [favrating, setFavrating] = useState('');
-    const [errormsg, setErrormsg] = useState('');
+    const favInputRef = useRef(null);
 
     useEffect(() => {
-        if (errormsg) {
-            toast.info(errormsg, {
-                position: 'top-center',
-                autoClose: 1500,
-                hideProgressBar: true,
-                closeButton: false
-            });
-            setErrormsg(''); // Clear the errormsg state after displaying the toast
+        if (favInputRef.current) {
+            favInputRef.current.focus();
         }
-    }, [errormsg]);
+    }, [favCardVisible]);
 
     const handleFavCardVisible = () => {
         toggleFavCardVisible();
@@ -33,7 +27,8 @@ function FavCard({ userDetail, movie, favCardVisible, toggleFavCardVisible }) {
     const handleFav = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${process.env.BACKEND_API_URL}/api/favourite`, {
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/favourite`, {
+                id,
                 movie,
                 user,
                 favrating,
@@ -49,30 +44,30 @@ function FavCard({ userDetail, movie, favCardVisible, toggleFavCardVisible }) {
         } catch (error) {
             if (error.response && error.response.status === 400) {
                 console.log(error.response.data.message);
-                setErrormsg(error.response.data.message);
+                toast.info('Already exists in favourites', {
+                    position: 'top-center',
+                    autoClose: 1500,
+                    hideProgressBar: true,
+                    closeButton: false
+                });
             } else {
                 console.log('An unexpected error occurred. Please try again.');
-                setErrormsg(error.response.data.message);
+                toast.error('Internal server error', {
+                    position: 'top-center',
+                    autoClose: 1500,
+                    hideProgressBar: true,
+                    closeButton: false
+                });
             }
         }
     }
 
     return (
         <>
-            <ToastContainer />
             {favCardVisible && (
                 <div className="fav-bg" onClick={handleFavCardVisible}>
                     <div className="cardContainer" id='favCardContainer' onClick={handleContainerClick}>
                         <div className="card" id='favCard'>
-                            {/*<img
-                                className='fav-poster'
-                                src={
-                                    movie.poster_path
-                                        ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-                                        : 'https://placehold.co/500x750.png'
-                                }
-                                alt={movie.title || movie.name}
-                            />*/}
                             <div className="fav-footer">
                                 <form className='fav-form' onSubmit={handleFav}>
                                     <div className='fav-rating'>
@@ -81,6 +76,7 @@ function FavCard({ userDetail, movie, favCardVisible, toggleFavCardVisible }) {
                                             type='number' name='favrating'
                                             step={0.1} max={10} min={0} placeholder='0.0'
                                             onChange={(e) => { setFavrating(e.target.value) }}
+                                            ref={favInputRef}
                                             required
                                         />
                                         <span>/10</span>

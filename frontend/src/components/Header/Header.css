@@ -2,15 +2,23 @@ Header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--background);
+    background: var(--header-bg);
     padding: 0% 6.5% 0% 6.5%;
     height: 63px;
-    position: sticky; 
-    top: 0; 
-    left: 0; 
-    right: 0; 
-    z-index: 1;
-    box-shadow: 0 2px 4px rgba(23, 33, 57, 0.3);  }
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+}
+
+.header.transparent {
+    background: transparent;
+}
+
+.header.colored {
+    background: var(--header-bg);
+}
 
 .header-logo {
     display: flex;
@@ -83,7 +91,7 @@ Header {
     cursor: pointer;
 }
 
-.search-icon{
+.search-icon {
     font-size: 24px;
     color: var(--light-font);
     margin-top: 1px;
@@ -118,7 +126,7 @@ Header {
     margin-top: 1px;
 }
 
-.profile-pic{
+.profile-pic {
     width: 33px;
     height: 33px;
     display: flex;
@@ -127,7 +135,7 @@ Header {
     border-radius: 50%;
     border: none;
     margin-left: 24px;
-    margin-top: 1px; 
+    margin-top: 1px;
     background-color: transparent;
     cursor: pointer;
     object-fit: cover;

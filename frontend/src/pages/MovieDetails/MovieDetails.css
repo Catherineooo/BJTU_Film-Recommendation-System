@@ -1,6 +1,8 @@
 .detail-wrapper {
     display: flex;
     justify-content: space-between;
+    min-height: 68vh;
+    height: 100%;
     width: auto;
     padding: 25px 6.5% 3% 6.5%;
 }
@@ -12,6 +14,10 @@
 }
 
 .detail-video {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
     width: auto;
     height: 490px;
     padding: 0 25px 0 0;
@@ -34,17 +40,21 @@
 
 .poster-container {
     position: relative;
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 28%;
+    height: 100%;
 }
 
 .detail-poster {
     display: block;
+    max-width: 100%;
+    max-height: 100%;
     border-radius: 12px;
-    height: 100%;
-    width: 100%;
     filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.3));
 }
+
 
 .fav-btn {
     height: 43px;
@@ -61,11 +71,11 @@
     cursor: pointer;
 }
 
-.fav-btn:hover{
+.fav-btn:hover {
     background-color: rgba(0, 0, 0, 0.7);
 }
 
-.heart-icon{
+.heart-icon {
     margin-top: 2px;
     width: 24px;
     height: 24px;

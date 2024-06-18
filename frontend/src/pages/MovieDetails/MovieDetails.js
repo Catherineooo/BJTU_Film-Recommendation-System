@@ -4,10 +4,11 @@ import { fetchMovieDetails, similarMovies, fetchTvDetails, fetchMovies, fetchTv,
 import SideMovieCard from '../../components/SideMovieCard/SideMovieCard'
 import ReviewCard from '../../components/ReviewCard/ReviewCard';
 import FavCard from '../../components/FavCard/FavCard';
+import Loader from '../../components/Loader/Loader';
 import { AiOutlineHeart, AiOutlinePlayCircle, AiOutlineComment } from "react-icons/ai";
 import './MovieDetails.css';
 
-const MovieDetails = ({ user }) => {
+const MovieDetails = ({ user, toggleLoginVisible }) => {
   const { obj, id } = useParams();
   const [movie, setMovie] = useState(null);
   const [recommend, setRecommend] = useState([]);
@@ -15,6 +16,7 @@ const MovieDetails = ({ user }) => {
   const [reviews, setReviews] = useState([]);
   const [video, setVideo] = useState(null);
   const [watch, setWatch] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [favCardVisible, setFavCardVisible] = useState(false);
 
   useEffect(() => {
@@ -82,28 +84,36 @@ const MovieDetails = ({ user }) => {
   }
 
   const toggleFavCardVisible = () => {
-    setFavCardVisible(!favCardVisible);
+    if (user) {
+      setFavCardVisible(!favCardVisible);
+    } else {
+      toggleLoginVisible();
+    }
   }
 
-  if (!movie) return <div>Loading...</div>;
+  if (!movie) return <Loader />;
 
   return (
     <>
-      <FavCard userDetail={user} movie={movie} favCardVisible={favCardVisible} toggleFavCardVisible={toggleFavCardVisible} />
+      <FavCard id={id} userDetail={user} movie={movie} favCardVisible={favCardVisible} toggleFavCardVisible={toggleFavCardVisible} />
       <div className="detail-wrapper">
         <div className='detail-left'>
-          {watch &&
+          {watch && (
             <div className='detail-video'>
+              {loading &&
+                <Loader />
+              }
               <iframe
                 width="560"
                 height="315"
                 src={`https://www.youtube.com/embed/${video}`}
                 allowFullScreen={true}
-                title="Movie Trailer"
+                title={movie.title || movie.name}
                 className='video-iframe'
+                onLoad={() => setLoading(false)} // Set loading to false when iframe loads
               ></iframe>
             </div>
-          }
+          )}
           <div className='detail-left-top'>
             <div className='poster-container'>
               <img
@@ -115,7 +125,7 @@ const MovieDetails = ({ user }) => {
                 }
                 alt={movie.title || movie.name}
               />
-              <button class="fav-btn" onClick={toggleFavCardVisible} ><AiOutlineHeart className='heart-icon' /></button>
+              <button className="fav-btn" onClick={toggleFavCardVisible} ><AiOutlineHeart className='heart-icon' /></button>
             </div>
             <div className="detail-container">
               <h1>{movie.title ? movie.title : movie.name}</h1>
@@ -126,7 +136,7 @@ const MovieDetails = ({ user }) => {
                 <span className="movie-detail-rating">{movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A'}</span>
               </div>
               <div className='genres'>
-                {genre.map((genreName, index) => (
+                {genre.slice(0, 3).map((genreName, index) => (
                   <span key={index} className='genre-item'>{genreName}</span>
                 ))}
               </div>
