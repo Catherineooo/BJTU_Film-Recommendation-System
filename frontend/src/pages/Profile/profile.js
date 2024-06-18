@@ -34,7 +34,7 @@ function Profile({ userDetails, profileVisible, toggleProfileVisible }) {
                             <div className="profile-separator">
                                 <div></div>
                             </div>
-                            <button className="login-btn" id="logout-btn" onClick={handleLogout}>Logout</button>
+                            <button className="login-btn" id="logout-btn" onClick={handleLogout}>退出登录</button>
                         </div>
                     </div>
                 </div>

@@ -61,7 +61,7 @@ const Header = ({ userDetails, toggleProfileVisible, toggleLoginVisible }) => {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search for movies..."
+            placeholder="搜索更多影片..."
             className="search-bar"
             required
           />

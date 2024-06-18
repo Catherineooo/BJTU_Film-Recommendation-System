@@ -92,10 +92,10 @@ function Login({ loginVisible, toggleLoginVisible, toggleSignupVisible }) {
 									placeholder="Password"
 									required
 								/>
-								<button type='submit' className="login-btn">Sign In</button>
+								<button type='submit' className="login-btn">登录</button>
 							</form>
 							<p className="auth-switch">
-								Don't Have Account ? <span className="switch-link" onClick={handleSignupVisible}>Sign Up</span>
+								还没有账户 ? <span className="switch-link" onClick={handleSignupVisible}>注册</span>
 							</p>
 						</div>
 					</div>

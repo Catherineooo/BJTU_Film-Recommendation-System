@@ -38,7 +38,7 @@ const Home = () => {
       )}
       <div className='movie-section' >
         <div className='section-header'>
-          <h2>Popular Movies</h2>
+          <h2>热门电影</h2>
           <Link to={`/movies/${'popular'}/${'movie'}`} className='more-link' >
             <button className='more-btn'>More <AiOutlineRight className='right-icon' /></button>
           </Link>
@@ -51,7 +51,7 @@ const Home = () => {
       </div>
       <div className='movie-section' >
         <div className='section-header'>
-          <h2>Popular TV Shows</h2>
+          <h2>热门电视剧</h2>
           <Link to={`/movies/${'popular'}/${'tv'}`} className='more-link' >
             <button className='more-btn'>More <AiOutlineRight className='right-icon' /></button>
           </Link>
@@ -64,7 +64,7 @@ const Home = () => {
       </div>
       <div className='movie-section' >
         <div className='section-header'>
-          <h2>Top Rated TV Shows</h2>
+          <h2>高分电视剧</h2>
           <Link to={`/movies/${'top_rated'}/${'tv'}`} className='more-link' >
             <button className='more-btn'>More <AiOutlineRight className='right-icon' /></button>
           </Link>
@@ -77,7 +77,7 @@ const Home = () => {
       </div>
       <div className='movie-section' >
         <div className='section-header'>
-          <h2>Upcoming Movies</h2>
+          <h2>即将到来</h2>
           <Link to={`/movies/${'upcoming'}/${'movie'}`} className='more-link' >
             <button className='more-btn'>More <AiOutlineRight className='right-icon' /></button>
           </Link>

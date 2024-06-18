@@ -150,7 +150,7 @@ const MovieDetails = ({ user, toggleLoginVisible }) => {
           </div>
           <div className='detail-review'>
             <div className="review-section">
-              <h2>Reviews</h2>
+              <h2>评论</h2>
               <div className="review-list">
                 {reviews.length > 0 ? (
                   reviews.map((review) => (
@@ -159,7 +159,7 @@ const MovieDetails = ({ user, toggleLoginVisible }) => {
                 ) : (
                   <div className='no-reviews'>
                     <AiOutlineComment className='comment-icon' />
-                    No reviews
+                    还没有评论哟
                   </div>
                 )}
               </div>
@@ -167,7 +167,7 @@ const MovieDetails = ({ user, toggleLoginVisible }) => {
           </div>
         </div>
         <div className="detail-right">
-          <h2>You May Also Like</h2>
+          <h2>相关推荐</h2>
           {recommend.map(movie => (
             <SideMovieCard key={movie.id} movie={movie} id={id} />
           ))}

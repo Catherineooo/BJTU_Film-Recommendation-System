@@ -80,10 +80,10 @@ function Signup({ signupVisible, toggleSignupVisible, toggleLoginVisible }) {
 									placeholder="Password"
 									required
 								/>
-								<button type="submit" className="login-btn">Sign Up</button>
+								<button type="submit" className="login-btn">注册</button>
 							</form>
 							<p className="auth-switch">
-								Already Have Account ? <span className="switch-link" onClick={handleLoginVisible}>Login</span>
+								已经有账户 ? <span className="switch-link" onClick={handleLoginVisible}>登录</span>
 							</p>
 						</div>
 					</div>
