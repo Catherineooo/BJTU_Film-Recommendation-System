@@ -1,9 +1,10 @@
 //login.js
 import React, { useState } from "react";
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import './login.css';
+import { encoder } from "../../utils/passwordUtil";
 
 function Login({ loginVisible, toggleLoginVisible, toggleSignupVisible }) {
 	const [username, setUsername] = useState('');
@@ -11,23 +12,31 @@ function Login({ loginVisible, toggleLoginVisible, toggleSignupVisible }) {
 
 	const handleLogin = async (e) => {
 		e.preventDefault();
-        console.log("login u="+ username + ' p='+ password)
+    // console.log("login u="+ username + ' p='+ password)
+		// console.log(process.env.REACT_APP_BACKEND_URL)
+		const hashedPassword = encoder(password);
+		console.log(hashedPassword);
 		try {
-			const response = await axios.post('http://localhost:8000/login', {
-                //`${process.env.VUE_APP_BACKEND_API_URL}/login`
+			const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`, {
 				username: username,
-				password,
+				password: hashedPassword,
 			});
-            console.log(response)
+      console.log(response)
 			if (response.data.data.state === 1) {
-                console.log("登录成功")
-				const token = response.data.token;
+        console.log("登录成功")
+				const token = response.data.data.user.token;
 				localStorage.setItem('token', token); // Store token in localStorage
 				console.log(response.data);
-				window.location = '/';
+				toast.success(response.data.data.message, {
+					position: 'top-center',
+					autoClose: 1500,
+					hideProgressBar: true,
+					closeButton: false
+				});
+				window.location.reload();
 			} else {
-                console.log("登录失败")
-				toast.info(response.data.message, {
+        console.log("登录失败")
+				toast.info(response.data.data.message, {
 					position: 'top-center',
 					autoClose: 1500,
 					hideProgressBar: true,
@@ -35,15 +44,15 @@ function Login({ loginVisible, toggleLoginVisible, toggleSignupVisible }) {
 				});
 			}
 		} catch (error) {
-			if (error.response && error.response.status === 400) {
-				toast.info(error.response.message, {
+			if (error.response && error.response.status === 401) {
+				toast.error('用户名或密码错误', {
 					position: 'top-center',
 					autoClose: 1500,
 					hideProgressBar: true,
 					closeButton: false
 				});
 			} else {
-				toast.error(error.response.message, {
+				toast.error('Internal server error', {
 					position: 'top-center',
 					autoClose: 1500,
 					hideProgressBar: true,
@@ -68,7 +77,6 @@ function Login({ loginVisible, toggleLoginVisible, toggleSignupVisible }) {
 
 	return (
 		<>
-			<ToastContainer />
 			{loginVisible && (
 				<div className="auth-bg" onClick={handleLoginVisible}>
 					<div className="cardContainer" onClick={handleContainerClick}>
@@ -84,10 +92,10 @@ function Login({ loginVisible, toggleLoginVisible, toggleSignupVisible }) {
 									placeholder="Password"
 									required
 								/>
-								<button type='submit' className="login-btn">Sign In</button>
+								<button type='submit' className="login-btn">登录</button>
 							</form>
 							<p className="auth-switch">
-								Don't Have Account ? <span className="switch-link" onClick={handleSignupVisible}>Sign Up</span>
+								还没有账户 ? <span className="switch-link" onClick={handleSignupVisible}>注册</span>
 							</p>
 						</div>
 					</div>

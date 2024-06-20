@@ -1,0 +1,25 @@
+.targetUpdateMovie{
+    color: var(--light-font);
+    margin-bottom: 10px;
+}
+
+#ratingCardContainer::before {
+    width: 100px;
+    height: 100px;
+    content: "";
+    position: absolute;
+    background-color: transparent;
+    z-index: -1;
+    border-radius: 50%;
+    left: 100px;
+    top: 50px;
+    transition: all 1s;
+}
+
+#ratingCardContainer:hover::before {
+    transform: translate(0, 50px);
+}
+
+#ratingCard{
+    width: fit-content;
+}

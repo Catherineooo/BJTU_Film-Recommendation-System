@@ -10,6 +10,7 @@
     display: flex;
     height: fit-content;
     width: 100%;
+    min-height: 68vh;
 }
 
 .favourite-list {
@@ -47,6 +48,7 @@ td {
 th {
     cursor: pointer;
     border-top: 2px solid var(--grey-bg);
+    border-bottom: 2px solid var(--grey-bg);
     background-color: var(--card_black);
     position: sticky;
     top: -8.5px;
@@ -58,30 +60,109 @@ th {
 
 tr {
     height: 100%;
+    position: relative;
 }
 
-
+.rank-col,
 .rating-col,
-.more-col {
+.date-col {
     width: 5%;
 }
 
-.date-col {
-    width: 10%;
+.more-col {
+    width: 3%;
+}
+
+.more-cell {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: block;
+    position: absolute;
+    top: 100%;
+    right: 3%;
+    backdrop-filter: blur(10px);
+    background-color: var(--glassy-bg);
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.dropdown-item {
+    width: 100%;
+}
+
+.edit-btn,
+.delete-btn {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 8px 16px;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--light-font);
+    font-size: 14px;
+    width: 100%;
+}
+
+.edit-btn{
+    border-radius: 12px 12px 0 0;
+}
+
+.delete-btn{
+    border-radius: 0 0 12px 12px;
+}
+
+.edit-btn:hover, .delete-btn:hover{
+    background-color: var(--glassy-bg);
+    backdrop-filter: blur(20px);
+}
+
+.edit-btn:hover{
+    color: var(--blue-font);
+}
+
+.delete-btn:hover{
+    color: var(--red-btn);
+}
+
+.edit-icon,
+.delete-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+}
+
+.fav-movie-link {
+    color: var(--light-font);
+    text-decoration: none;
+}
+
+.fav-movie-link:hover {
+    color: var(--blue-font);
+    text-decoration: underline;
+}
+
+.date-cell {
+    text-align: center;
 }
 
 .rating-cell {
     color: var(--blue-font);
 }
 
-.rating-cell div{
+.rating-cell div {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .fav-star {
-    margin-top: 2px;
+    font-size: 16px;
+    margin-top: 1.5px;
     margin-left: 3px;
 }
 
@@ -90,4 +171,14 @@ tr {
     border: none;
     color: var(--light-font);
     cursor: pointer;
+}
+
+.empty {
+    height: 100%;
+    min-height: 68vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--light-font);
 }

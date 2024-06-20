@@ -15,16 +15,16 @@ const MovieLists = () => {
                 if (id === 'movie') {
                     setMovies(await fetchMovies(type));
                     if (type === 'popular') {
-                        setSection('Popular Movies');
+                        setSection('热门电影');
                     } else {
-                        setSection('Upcoming Movies');
+                        setSection('即将上映');
                     }
                 } else {
                     setMovies(await fetchTv(type));
                     if (type === 'popular') {
-                        setSection('Popular Tv Shows');
+                        setSection('热门电视剧');
                     } else {
-                        setSection('Top Rated Tv Shows');
+                        setSection('高分电视剧');
                     }
                 }
             } catch {

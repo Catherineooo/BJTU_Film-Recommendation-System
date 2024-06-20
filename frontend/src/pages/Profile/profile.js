@@ -15,7 +15,7 @@ function Profile({ userDetails, profileVisible, toggleProfileVisible }) {
 
     const handleLogout = async () => {
         localStorage.removeItem('token');
-        window.open(`${process.env.BACKEND_API_URL}/auth/logout`, "_self");
+        window.location = '/';
     };
 
     return (
@@ -28,14 +28,13 @@ function Profile({ userDetails, profileVisible, toggleProfileVisible }) {
                             <div className='auth-profile'>
                                 <img className='profile-img' src={user.picture || '/images/fox-avatar.png'} alt={user.name} />
                                 <div className='profile-detail'>
-                                    <span>{user.name}</span>
-                                    <span>{user.email}</span>
+                                    <span>{user.username}</span>
                                 </div>
                             </div>
                             <div className="profile-separator">
                                 <div></div>
                             </div>
-                            <button className="login-btn" id="logout-btn" onClick={handleLogout}>Logout</button>
+                            <button className="login-btn" id="logout-btn" onClick={handleLogout}>退出登录</button>
                         </div>
                     </div>
                 </div>

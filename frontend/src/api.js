@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_KEY = 'd101d3c09aadebd6fb2d039f413cc1ac';
+const API_KEY = 'f127c92dca4a5dfc6893417180e4e92b';
 const BASE_URL = 'https://api.themoviedb.org/3';
 
 export const fetchMovies = async (type) => {
@@ -41,4 +41,9 @@ export const similarMovies = async ( type, id) => {
 export const fetchVideos = async (type, id) => {
   const response = await axios.get(`${BASE_URL}/${type}/${id}/videos?api_key=${API_KEY}`);
   return response.data.results;
+}
+
+export const fetchIMDBMovie = async (id) => {
+  const response = await axios.get(`${BASE_URL}/find/${id}?api_key=${API_KEY}&external_source=imdb_id`);
+  return response.data;
 }
