@@ -129,9 +129,9 @@ const MovieDetails = ({ user, toggleLoginVisible }) => {
             <div className="detail-container">
               <h1>{movie.title ? movie.title : movie.name}</h1>
               <p className="movie-overview">{movie.overview}</p>
-              <p className="movie-date">Release Date: {movie.release_date ? movie.release_date : movie.first_air_date}</p>
+              <p className="movie-date">上映日期: {movie.release_date ? movie.release_date : movie.first_air_date}</p>
               <div className="movie-rating">
-                <span>Rating: </span>
+                <span>评分: </span>
                 <span className="movie-detail-rating">{movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A'}</span>
               </div>
               <div className='genres'>
