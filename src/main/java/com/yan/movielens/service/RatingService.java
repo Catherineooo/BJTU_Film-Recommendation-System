@@ -35,6 +35,8 @@ public interface RatingService {
      */
     Rating setRating(Rating rating);
 
+    List<Rating> findAllRatingsByUserId(Integer userId);
+
 
 
 

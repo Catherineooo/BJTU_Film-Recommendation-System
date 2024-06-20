@@ -10,6 +10,11 @@ import java.util.Optional;
 
 public interface RatingRepository extends JpaRepository<Rating, UserAndMovieKey> {
 
+    /*
+    * 获取当前用户的所有评价
+    * */
+    // 根据用户ID查找所有评分记录
+    List<Rating> findByKeyUserId(Integer userId);
 
     Optional<Rating> findByKeyUserIdAndKeyImdbId(Integer userId, String imdb_id);
 //    Optional<Rating> findByKeyUserIdAndKeyImdb_id(Integer userId, String imdbId);

@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/rate")
@@ -39,7 +40,7 @@ public class RatingController {
     public ResponseEntity<Map<String, Object>> addRating(@RequestBody @NotNull Map<String, String> updateData){
         String username = updateData.get("username");
         String imdbId = updateData.get("imdb_id");
-        String movie_info = updateData.get("movie_info");
+        String movie = updateData.get("movie_info");
 
         Double rating = Double.valueOf(updateData.get("rating"));
         System.out.println(" imdbId="+imdbId+" rating"+rating);
@@ -68,6 +69,7 @@ public class RatingController {
         key.setUserId(userId);
         key.setImdbId(imdbId);
         rating_record.setKey(key);
+        rating_record.setMovie(movie);
         rating_record.setRating(rating);
         rating_record.setTimeStamp(timeStamp);
 
@@ -82,8 +84,7 @@ public class RatingController {
         Map<String, Object> userData = new HashMap<>();
         userData.put("id", user.getId());
         userData.put("username", user.getUsername());
-        // 假设这里有生成 token 的逻辑，将 token 放入 userData
-//        userData.put("token", "your_generated_token_here");
+
         data.put("user", userData);
         response.put("data", data);
         return ResponseEntity.ok(response);
@@ -161,6 +162,43 @@ public class RatingController {
         successData.put("state", 1);
         successData.put("message", "删除评分成功");
         successResponse.put("data", successData);
+        return ResponseEntity.ok(successResponse);
+    }
+
+    /*
+    * 查询当前用户所有评价过的
+    * */
+    @GetMapping("/getRating")
+    public ResponseEntity<Map<String, Object>> getRating(@RequestParam String username) {
+        Optional<User> userOptional = userService.getByUsername(username);
+        if (!userOptional.isPresent()) {
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("code", 404);
+            Map<String, Object> errorData = new HashMap<>();
+            errorData.put("state", 0);
+            errorData.put("message", "用户不存在");
+            errorResponse.put("data", errorData);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+        }
+        User user = userOptional.get();
+        List<Rating> ratings = ratingService.findAllRatingsByUserId(user.getId());
+
+        List<Map<String, Object>> ratingList = ratings.stream().map(rating -> {
+            Map<String, Object> ratingMap = new HashMap<>();
+            ratingMap.put("imdb_id", rating.getKey().getImdbId());
+            ratingMap.put("movie", rating.getMovie());
+            ratingMap.put("rating", rating.getRating());
+            return ratingMap;
+        }).collect(Collectors.toList());
+
+        Map<String, Object> successResponse = new HashMap<>();
+        successResponse.put("code", 200);
+        Map<String, Object> successData = new HashMap<>();
+        successData.put("state", 1);
+        successData.put("message", "查询成功");
+        successData.put("ratingList", ratingList);
+        successResponse.put("data", successData);
+
         return ResponseEntity.ok(successResponse);
     }
     private ResponseEntity<Map<String, Object>> buildErrorResponse(int statusCode, String message) {

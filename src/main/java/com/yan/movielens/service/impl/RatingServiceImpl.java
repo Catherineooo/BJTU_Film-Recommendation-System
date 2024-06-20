@@ -25,6 +25,7 @@ public class RatingServiceImpl implements RatingService {
     private MovieRepository movieRepository;
     private UserRepository userRepository;
 
+
     public RatingServiceImpl(MovieRepository movieRepository,
                              RatingRepository ratingRepository,
                              UserRepository userRepository){
@@ -33,6 +34,11 @@ public class RatingServiceImpl implements RatingService {
         this.userRepository=userRepository;
     }
 
+    //查找我的所有评价
+    @Override
+    public List<Rating> findAllRatingsByUserId(Integer userId) {
+        return ratingRepository.findByKeyUserId(userId);
+    }
     //删除记录
     @Override
     public void deleteRating(Rating rating) {

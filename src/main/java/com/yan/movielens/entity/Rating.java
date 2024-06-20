@@ -21,13 +21,16 @@ public class Rating implements Serializable {
     @Column(name = "timestamp", columnDefinition = "bigint")
     private long timeStamp;
 
+    @Column(name = "movie", columnDefinition = "bigint")
+    private String movie;
     public Rating() {}
 
-    public Rating(Integer userId, String imdbId, Double rating, Long timeStamp) {
+    public Rating(Integer userId, String imdbId, Double rating, Long timeStamp, String movie) {
         this.key = new UserAndMovieKey();
         this.key.setUserId(userId);
         this.key.setImdbId(imdbId);
         this.rating = rating;
         this.timeStamp = timeStamp;
+        this.movie = movie;
     }
 }
