@@ -175,13 +175,172 @@
 
 调drj的接口
 
-## 打分
+## 电影评分
 
-### 6. 用户给电影打分[POST]
+### 用户给电影评分[POST]
 
+* url:  /api/addRating
+* data:
 
+  - imdb_id: string
+  - movie_info: string
+  - username: string
+  - rating: float
 
+* response：
 
+  * 成功
+
+    ```json
+    {
+        "code": 200,
+        "data": {
+            "state": 1,
+            "message": "评分成功"
+            }
+        }
+    }
+    ```
+
+  * 失败
+
+    ```json
+    {
+        "code": 401,
+        "data": {
+            "state": 0,
+            "message": "xxx"
+            }
+        }
+    }
+    ```
+
+    
+
+### 用户更新电影评分[POST]
+
+- url:  /api/updateRating
+
+- data:
+
+  - username: string
+
+  - imdb_id: string
+
+  - rating: float
+
+- response：
+
+  * 成功
+
+    ```json
+    {
+        "code": 200,
+        "data": {
+            "state": 1,
+            "message": "评分更新成功"
+            }
+        }
+    }
+    ```
+
+  * 失败
+
+    ```json
+    {
+        "code": 401,
+        "data": {
+            "state": 0,
+            "message": "xxx"
+            }
+        }
+    }
+    ```
+
+    
+
+### 用户删除电影评分[POST]
+
+- url:  /api/deleteRating
+
+- data:
+
+  - username: string
+
+  - imdb_id: string
+
+- response：
+
+  * 成功
+
+    ```json
+    {
+        "code": 200,
+        "data": {
+            "state": 1,
+            "message": "删除评分成功"
+            }
+        }
+    }
+    ```
+
+  * 失败
+
+    ```json
+    {
+        "code": 401,
+        "data": {
+            "state": 0,
+            "message": "xxx"
+            }
+        }
+    }
+    ```
+
+    
+
+### 获取用户所有电影评分[GET]
+
+- url:  /api/getRating
+
+- data:
+
+  - username: string
+
+- response：
+
+  - 成功
+
+    ```json
+    {
+        "code": 200,
+        "data": {
+            "state": 1,
+            "message": "查询成功",
+            "ratingList": {
+                "imdb_id": string,
+                "movie": string,
+                "rating": float
+            	}
+            }
+        }
+    }
+    ```
+
+  - 失败
+
+    ```json
+    {
+        "code": 401,
+        "data": {
+            "state": 0,
+            "message": "xxx"
+            }
+        }
+    }
+    ```
+
+    
 
 ## 数据库设计
 

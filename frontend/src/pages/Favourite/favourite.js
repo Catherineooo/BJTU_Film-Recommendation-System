@@ -28,24 +28,23 @@ function Favourite({ userDetail }) {
 
     const handleUpdateFav = (updateRating, movieId) => async (e) => {
         e.preventDefault();
-        const email = userDetail.email;
-
         try {
-            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/updateFavourite`, {
-                email,
-                movieId,
-                updateRating
+            console.log('movieId:', movieId, 'updateRating:', updateRating);
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/updateRating`, {
+                username: userDetail.username,
+                imdb_id: movieId,
+                rating: updateRating
             });
 
             if (response.status === 200) {
                 toggleRatingCardVisible();
                 // Call getFavourite to refresh the list from backend
-                await getFavourite(email);
+                await getRating(userDetail);
             }
 
             console.log(response.data.message);
         } catch (error) {
-            if (error.response && error.response.status === 400) {
+            if (error.response && error.response.status === 401) {
                 console.log('Error:', error.response.data.message);
             } else {
                 console.log('An unexpected error occurred. Please try again.');
@@ -53,21 +52,21 @@ function Favourite({ userDetail }) {
         }
     }
 
-    const handleFavDelete = async (movieId, email) => {
+    const handleFavDelete = async (movieId, user) => {
         try {
-            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/deleteFavourite`, {
-                movieId,
-                email,
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/deleteFavourite`, { 
+                username: user.username,
+                imdb_id: movieId,
             })
 
             if (response.status === 200) {
                 // Call getFavourite to refresh the list from backend
-                await getFavourite(email);
+                await getRating(user);
             }
 
             console.log(response.data.message);
         } catch (error) {
-            if (error.response && error.response.status === 400) {
+            if (error.response && error.response.status === 401) {
                 console.log('Error:', error.response.data.message);
             } else {
                 console.log('An unexpected error occurred. Please try again.');
@@ -75,15 +74,15 @@ function Favourite({ userDetail }) {
         }
     }
 
-    const getFavourite = useCallback(async (email) => {
+    const getRating = useCallback(async (user) => {
         try {
-            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/getFavourite`, {
-                params: { userEmail: email }
+            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/getRating`, {
+                params: { username: user.username }
             });
-            console.log('Fetched data:', response.data.favLists);
-            setFavLists(response.data.favLists);
+            console.log('Fetched data:', response.data);
+            setFavLists(response.data.data.ratingList);
         } catch (error) {
-            if (error.response && error.response.status === 400) {
+            if (error.response && error.response.status === 401) {
                 console.log('Error:', error.response.data.message);
             } else {
                 console.log('An unexpected error occurred. Please try again.');
@@ -92,9 +91,9 @@ function Favourite({ userDetail }) {
     }, []);
 
     useEffect(() => {
-        if (userDetail && userDetail.email) {
-            console.log('useEffect triggered for user:', userDetail.email); // Debug log
-            getFavourite(userDetail.email);
+        if (userDetail && userDetail.username) {
+            console.log('useEffect triggered for user:', userDetail.username); // Debug log
+            getRating(userDetail);
         }
 
         document.addEventListener('click', handleOutsideClick);
@@ -102,7 +101,7 @@ function Favourite({ userDetail }) {
         return () => {
             document.removeEventListener('click', handleOutsideClick);
         };
-    }, [userDetail, getFavourite]);
+    }, [userDetail, getRating]);
 
     if (!userDetail) {
         return <div>Loading...</div>;
@@ -127,9 +126,9 @@ function Favourite({ userDetail }) {
                                 <thead>
                                     <tr>
                                         <th className="rank-col">#</th>
-                                        <th>Movie</th>
-                                        <th className="date-col">Release</th>
-                                        <th className="rating-col">Rating</th>
+                                        <th>电影名称</th>
+                                        <th className="date-col">上映年份</th>
+                                        <th className="rating-col">评分</th>
                                         <th className="more-col"></th>
                                     </tr>
                                 </thead>
@@ -153,13 +152,13 @@ function Favourite({ userDetail }) {
                                                     <div clasName="dropdown-item">
                                                         <button className="edit-btn" onClick={() => toggleRatingCardVisible(movie)}>
                                                             <AiOutlineEdit className="edit-icon" />
-                                                            Edit
+                                                            编辑评分
                                                         </button>
                                                     </div>
                                                     <div clasName="dropdown-item">
-                                                        <button className="delete-btn" onClick={() => handleFavDelete(movie.movieId, userDetail.email)}>
+                                                        <button className="delete-btn" onClick={() => handleFavDelete(movie.imdb_id, userDetail)}>
                                                             <AiOutlineDelete className="delete-icon" />
-                                                            Delete
+                                                            删除评分
                                                         </button>
                                                     </div>
                                                 </div>

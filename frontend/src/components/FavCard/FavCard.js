@@ -27,11 +27,12 @@ function FavCard({ id, userDetail, movie, favCardVisible, toggleFavCardVisible }
     const handleFav = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/favourite`, {
-                id,
-                movie,
-                user,
-                favrating,
+            console.log('id:', id, 'movie:', movie.imdb_id, 'user:', user, 'favrating:', favrating)
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/addRating`, {
+                imdb_id: movie.imdb_id,
+                movie_info: movie,
+                username: user.username,
+                rating: favrating
             });
             console.log(response.data.message);
             toast.success('Favourite added sucessfully', {

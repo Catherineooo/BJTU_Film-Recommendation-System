@@ -27,7 +27,7 @@ function RatingCard({ movie, toggleRatingCardVisible, handleUpdateFav }) {
                     <div className="card" id='ratingCard'>
                         <span className="targetUpdateMovie">{movie.movieName}</span>
                         <div className="fav-footer">
-                            <form className='fav-form' onSubmit={handleUpdateFav(updateRating, movie.movieId)}>
+                            <form className='fav-form' onSubmit={handleUpdateFav(updateRating, movie.imdb_id)}>
                                 <div className='fav-rating'>
                                     <input
                                         className='fav-input'
@@ -39,7 +39,7 @@ function RatingCard({ movie, toggleRatingCardVisible, handleUpdateFav }) {
                                     />
                                     <span>/10</span>
                                 </div>
-                                <button type='submit' className="trailer-btn" id="add-btn">Update</button>
+                                <button type='submit' className="trailer-btn" id="add-btn">更新</button>
                             </form>
                         </div>
                     </div>
