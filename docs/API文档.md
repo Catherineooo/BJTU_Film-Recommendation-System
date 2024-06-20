@@ -179,13 +179,28 @@
 
 ### 用户给电影评分[POST]
 
-* url:  /api/addRating
+* url:  /rate/addRating
+
 * data:
 
   - imdb_id: string
+
   - movie_info: string
+
   - username: string
+
   - rating: float
+
+    ```json
+    {
+        "username": "1",
+        "imdb_id": "tt0477342",
+        "movie_info" : "111",
+        "rating": 4.5
+    }
+    ```
+
+    
 
 * response：
 
@@ -196,30 +211,32 @@
         "code": 200,
         "data": {
             "state": 1,
-            "message": "评分成功"
+            "message": "评分成功",
+            "user": {
+                "id": 1,
+                "username": "1"
             }
         }
     }
     ```
-
+  
   * 失败
-
+  
     ```json
     {
         "code": 401,
         "data": {
             "state": 0,
-            "message": "xxx"
-            }
+            "message": "评分记录已存在"
         }
     }
     ```
-
     
+  
 
 ### 用户更新电影评分[POST]
 
-- url:  /api/updateRating
+- url:  /rate/updateRating
 
 - data:
 
@@ -228,6 +245,16 @@
   - imdb_id: string
 
   - rating: float
+
+    ```json'
+    {
+        "username": "1",
+        "imdb_id": "tt0477342",
+        "rating": 0.1
+    }
+    ```
+
+    
 
 - response：
 
@@ -255,19 +282,30 @@
             }
         }
     }
+    
+    
     ```
-
+    
     
 
 ### 用户删除电影评分[POST]
 
-- url:  /api/deleteRating
+- url:  /rate/deleteRating
 
 - data:
 
   - username: string
 
   - imdb_id: string
+
+    ```json
+    {
+        "username": "1",
+        "imdb_id": "tt0477333"
+    }
+    ```
+
+    
 
 - response：
 
@@ -279,29 +317,27 @@
         "data": {
             "state": 1,
             "message": "删除评分成功"
-            }
         }
     }
     ```
-
+    
   * 失败
-
+  
     ```json
     {
         "code": 401,
         "data": {
             "state": 0,
-            "message": "xxx"
-            }
+            "message": "评分记录不存在"
         }
     }
     ```
-
     
+  
 
 ### 获取用户所有电影评分[GET]
 
-- url:  /api/getRating
+- url:  /rate/getRating
 
 - data:
 
@@ -309,7 +345,7 @@
 
 - response：
 
-  - 成功
+  - 成功(给不了)
 
     ```json
     {
@@ -318,17 +354,48 @@
             "state": 1,
             "message": "查询成功",
             "ratingList": {
-                "imdb_id": string,
+                {"imdb_id": string,
                 "movie": string,
-                "rating": float
+                "rating": float}
             	}
             }
         }
     }
     ```
 
-  - 失败
+  - **我给你这样的**(important!!!!!!!!!) ratingList是一个列表
 
+    ```json
+    {
+        "code": 200,
+        "data": {
+            "ratingList": [
+                {
+                    "movie": "111",
+                    "imdb_id": "tt0477333",
+                    "rating": 4.5
+                },
+                {
+                    "movie": "222",
+                    "imdb_id": "tt0477334",
+                    "rating": 4.5
+                },
+                {
+                    "movie": "333",
+                    "imdb_id": "tt0477338",
+                    "rating": 4.5
+                },
+            ],
+            "state": 1,
+            "message": "查询成功"
+        }
+    }
+    ```
+    
+    
+    
+  - 失败
+  
     ```json
     {
         "code": 401,
@@ -339,7 +406,7 @@
         }
     }
     ```
-
+  
     
 
 ## 数据库设计
