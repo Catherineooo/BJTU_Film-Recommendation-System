@@ -13,7 +13,8 @@ function Login({ loginVisible, toggleLoginVisible, toggleSignupVisible }) {
 		e.preventDefault();
         console.log("login u="+ username + ' p='+ password)
 		try {
-			const response = await axios.post('http://localhost:8000/login', {//`${process.env.VUE_APP_BACKEND_API_URL}/login`
+			const response = await axios.post('http://localhost:8000/login', {
+                //`${process.env.VUE_APP_BACKEND_API_URL}/login`
 				username: username,
 				password,
 			});
