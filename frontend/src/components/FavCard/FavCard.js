@@ -27,15 +27,19 @@ function FavCard({ id, userDetail, movie, favCardVisible, toggleFavCardVisible }
     const handleFav = async (e) => {
         e.preventDefault();
         try {
-            console.log('id:', id, 'movie:', movie.imdb_id, 'user:', user, 'favrating:', favrating)
-            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/addRating`, {
+            console.log('imdb_id:', movie.imdb_id, 'movie:', movie, 'user:', user.username, 'favrating:', favrating)
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/rate/addRating`, {
                 imdb_id: movie.imdb_id,
-                movie_info: movie,
+                movie_info: JSON.stringify({
+                    title: movie.title,
+                    release_date: movie.release_date,
+                    id: movie.id,
+                }),
                 username: user.username,
                 rating: favrating
             });
-            console.log(response.data.message);
-            toast.success('Favourite added sucessfully', {
+            console.log(response.data);
+            toast.success(response.data.data.message, {
                 position: 'top-center',
                 autoClose: 1500,
                 hideProgressBar: true,
@@ -43,9 +47,9 @@ function FavCard({ id, userDetail, movie, favCardVisible, toggleFavCardVisible }
             });
             handleFavCardVisible();
         } catch (error) {
-            if (error.response && error.response.status === 400) {
+            if (error.response && error.response.status === 401) {
                 console.log(error.response.data.message);
-                toast.info('Already exists in favourites', {
+                toast.info('评分记录已存在', {
                     position: 'top-center',
                     autoClose: 1500,
                     hideProgressBar: true,

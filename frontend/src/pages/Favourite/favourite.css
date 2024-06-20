@@ -63,10 +63,19 @@ tr {
     position: relative;
 }
 
+.imdb-id-col {
+    width: 10%;
+}
+
 .rank-col,
 .rating-col,
 .date-col {
     width: 5%;
+}
+
+.date-col,
+.rating-col {
+    text-align: center;
 }
 
 .more-col {
@@ -145,6 +154,7 @@ tr {
     color: var(--blue-font);
     text-decoration: underline;
 }
+
 
 .date-cell {
     text-align: center;

@@ -20,9 +20,9 @@
     position: absolute;
     bottom: 10px;
     left: 10px;
-    font-size: 50px; /* 放大字体 */
-    font-weight: bold; /* 加粗字体 */
-    color: white; /* 字体颜色 */
+    font-size: 50px;
+    font-weight: bold;
+    color: white;
 }
 
 .swiper {
