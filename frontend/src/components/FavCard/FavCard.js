@@ -81,7 +81,7 @@ function FavCard({ id, userDetail, movie, favCardVisible, toggleFavCardVisible }
                                         />
                                         <span>/10</span>
                                     </div>
-                                    <button type='submit' className="trailer-btn" id="add-btn">Add to Favourites</button>
+                                    <button type='submit' className="trailer-btn" id="add-btn">确定评分</button>
                                 </form>
                             </div>
                         </div>

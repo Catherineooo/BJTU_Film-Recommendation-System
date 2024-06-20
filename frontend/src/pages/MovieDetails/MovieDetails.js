@@ -5,7 +5,7 @@ import SideMovieCard from '../../components/SideMovieCard/SideMovieCard'
 import ReviewCard from '../../components/ReviewCard/ReviewCard';
 import FavCard from '../../components/FavCard/FavCard';
 import Loader from '../../components/Loader/Loader';
-import { AiOutlineHeart, AiOutlinePlayCircle, AiOutlineComment } from "react-icons/ai";
+import { AiOutlineBarChart, AiOutlinePlayCircle, AiOutlineComment } from "react-icons/ai";
 import './MovieDetails.css';
 
 const MovieDetails = ({ user, toggleLoginVisible }) => {
@@ -125,7 +125,6 @@ const MovieDetails = ({ user, toggleLoginVisible }) => {
                 }
                 alt={movie.title || movie.name}
               />
-              <button className="fav-btn" onClick={toggleFavCardVisible} ><AiOutlineHeart className='heart-icon' /></button>
             </div>
             <div className="detail-container">
               <h1>{movie.title ? movie.title : movie.name}</h1>
@@ -140,10 +139,14 @@ const MovieDetails = ({ user, toggleLoginVisible }) => {
                   <span key={index} className='genre-item'>{genreName}</span>
                 ))}
               </div>
+              <button className="fav-btn" onClick={toggleFavCardVisible} >
+                <AiOutlineBarChart className='heart-icon' />
+                评分
+              </button>
               {video &&
                 <button className='trailer-btn' onClick={handleWatch}>
                   <AiOutlinePlayCircle className='play-icon' />
-                  Trailer
+                  预告片
                 </button>
               }
             </div>

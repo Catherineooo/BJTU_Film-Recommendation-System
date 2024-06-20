@@ -118,7 +118,7 @@ function Favourite({ userDetail }) {
             )}
             <div className="favourite-div">
                 <div className='section-header'>
-                    <h2>All-Time Favourites</h2>
+                    <h2>所有评分</h2>
                 </div>
                 <div className="favourite-container">
                     <div className="favourite-list">
@@ -169,7 +169,7 @@ function Favourite({ userDetail }) {
                                 </tbody>
                             </table>
                         ) : (
-                            <div className="empty">No favourites found.</div>
+                            <div className="empty">还没有评分哦</div>
                         )}
                     </div>
                 </div>

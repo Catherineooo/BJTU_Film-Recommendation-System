@@ -1,7 +1,7 @@
 // src/components/Header.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { AiOutlineHeart, AiOutlineUser, AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineBarChart, AiOutlineUser, AiOutlineSearch } from "react-icons/ai";
 import './Header.css';
 
 const Header = ({ userDetails, toggleProfileVisible, toggleLoginVisible }) => {
@@ -69,7 +69,7 @@ const Header = ({ userDetails, toggleProfileVisible, toggleLoginVisible }) => {
         </div>
       </form>
       <div className='utility'>
-        <button className='utility-btn' onClick={handleFav} ><AiOutlineHeart className='utility-icon' /></button>
+        <button className='utility-btn' onClick={handleFav} ><AiOutlineBarChart className='utility-icon' /></button>
         {user ? (
           <img
             className='profile-pic'
