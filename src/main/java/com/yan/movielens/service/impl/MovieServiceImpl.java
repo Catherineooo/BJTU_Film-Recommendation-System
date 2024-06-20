@@ -54,19 +54,6 @@ public class MovieServiceImpl implements MovieService {
         return pageEntity;
     }
 
-    @Override
-    public List<MovieDetails> getHotMovieDetailsList(Integer num) {
-
-        List<MovieDetails> movieDetailsList= new ArrayList<>();
-        List<Movie> movieList=getHotMovieList(num);
-        for(Movie movie:movieList){
-            MovieDetails movieDetails=new MovieDetails(movie);
-            Integer movieId=movie.getId();
-            movieDetails.setRating(ratingService.getAveRatingById(movieId));
-            movieDetailsList.add(movieDetails);
-        }
-        return movieDetailsList;
-    }
 
     @Override
     public Optional<Movie> getById(Integer id) {
@@ -74,28 +61,6 @@ public class MovieServiceImpl implements MovieService {
     }
 
 
-    private List<Movie> getHotMovieList(Integer num) {
-
-        Map<Integer,Integer> movieHits=new HashMap<>();
-
-        List movieHit=ratingRepository.getMovieHitsList();
-        for(Object obj:movieHit){
-            Object[] objects=(Object[])obj;
-            movieHits.put(Integer.parseInt(objects[0].toString()),Integer.parseInt(objects[1].toString()));
-        }
-
-        List<Integer> movieIdList=MapUtils.sortByValueList(movieHits,num,0);
-        List<Movie> movieDetailsList=new ArrayList<>();
-
-        for(Integer movieId:movieIdList){
-            Optional<Movie> movieOptional=getById(movieId);
-            if(movieOptional.isPresent()){
-                movieDetailsList.add(movieOptional.get());
-            }
-        }
-
-        return movieDetailsList;
-    }
 
 
     @Override

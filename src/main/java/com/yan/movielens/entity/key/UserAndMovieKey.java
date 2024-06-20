@@ -10,16 +10,14 @@ import java.io.Serializable;
 @Embeddable
 public class UserAndMovieKey implements Serializable {
 
-    @Column(name = "userId")
+    @Column(name = "userid")
     private Integer userId;
 
-    @Column(name = "movieId")
-    private Integer movieId;
-    // 省略setter,getter方法
+    @Column(name = "imdbid")
+    private String imdbId;
 
     @Override
     public String toString() {
-        return "PeopleKey [userId=" + userId + ", movieId=" + movieId + "]";
+        return "UserAndMovieKey [userId=" + userId + ", imdbId=" + imdbId + "]";
     }
-
 }

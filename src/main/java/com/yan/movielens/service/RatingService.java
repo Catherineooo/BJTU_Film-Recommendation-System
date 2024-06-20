@@ -17,42 +17,16 @@ public interface RatingService {
      */
     List<Integer> getAllRatedMovies();
 
+    void deleteRating(Rating rating);
     /**
      * 根据用户Id和电影Id查找评价
      * @param userId 用户Id
-     * @param movieId 电影Id
+     * @param imdb_id 电影Id imdb_id
      * @return
      */
-    Optional<Rating> getRating(Integer userId, Integer movieId);
+    Optional<Rating> getRating(Integer userId, String imdb_id);//Integer movieId
+    public Optional<Rating> findByUserIdAndImdbId(Integer userId, String imdbId);
 
-    /**
-     * 根据id获得电影的平均评分
-     * @param id
-     * @return
-     */
-    Double getAveRatingById(Integer id);
-
-    /**
-     * 查询评分高电影列表
-     * @param num 需要排名前几的高评分电影
-     * @return 电影列表
-     */
-    List<MovieDetails> getHighRateMovieList(Integer num);
-
-    /**
-     * 查找这个用户评分过的电影列表,即历史记录
-     * @param id 用户id
-     * @param num 取最近的num个评分
-     * @return 电影列表
-     */
-    List<HistoryEntity> getHistoryByUserId(Integer id, int num);
-
-    /**
-     * 查找为这部电影评分过的用户列表
-     * @param id 电影Id
-     * @return 用户列表
-     */
-    List<User> getUserListByMovieId(Integer id);
 
     /**
      * 保存评分
@@ -62,11 +36,6 @@ public interface RatingService {
     Rating setRating(Rating rating);
 
 
-    /**
-     * 随机获取num个评价
-     * @param num 随机个数
-     * @return num个评价
-     */
-    List<Rating> getRandomList(int num);
+
 
 }

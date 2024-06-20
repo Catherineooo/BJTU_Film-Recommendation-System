@@ -37,9 +37,9 @@ class RatingRepositoryTest {
 
     @Test
     void test2(){
-        List<MovieDetails> movieDetailsList=ratingService.getHighRateMovieList(5);
-        for(MovieDetails movieDetails:movieDetailsList){
-            System.out.println(movieDetails.getTitle());
-        }
+//        List<MovieDetails> movieDetailsList=ratingService.getHighRateMovieList(5);
+//        for(MovieDetails movieDetails:movieDetailsList){
+//            System.out.println(movieDetails.getTitle());
+//        }
     }
 }

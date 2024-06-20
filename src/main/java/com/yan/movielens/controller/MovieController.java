@@ -29,21 +29,7 @@ public class MovieController {
         this.movieService=movieService;
         this.ratingService=ratingService;
     }
-   /* @GetMapping("/search")
-    public ResponseEntity<String> searchMovies(@RequestParam("query") String query) {
-        // 构建TMDB API的请求URL
-        String apiUrl = UriComponentsBuilder.fromHttpUrl(TMDB_SEARCH_URL)
-                .queryParam("query", query)
-                .queryParam("api_key", tmdbApiKey)
-                .toUriString();
 
-        // 使用RestTemplate发送GET请求并获取响应
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> response = restTemplate.getForEntity(apiUrl, String.class);
-
-        // 直接将TMDB的响应返回给前端
-        return response;
-    }*/
    @GetMapping("/recommend")
    public ResponseEntity<Map<String, Object>> searchMovies(@RequestParam("userId") Integer userId, @RequestParam("token") String token)  {
        // 构建返回数据
@@ -58,10 +44,7 @@ public class MovieController {
        response.put("data", data);
        return ResponseEntity.ok(response);
    }
-    @GetMapping(value = "/hotmovie")
-    public List<MovieDetails> getHotMovie(){
-        return movieService.getHotMovieDetailsList(5);
-    }
+
 
     @PostMapping(value = "/movieid")
     public Movie getMovieByID(@RequestParam(value = "movieId") Integer id){
@@ -72,25 +55,12 @@ public class MovieController {
         return null;
     }
 
-    @PostMapping(value = "/moviedetails")
-    public MovieDetails getMovieDetailsById(@RequestParam(value = "movieId")Integer id){
-        MovieDetails movieDetails=null;
-        Optional<Movie> movie=movieService.getById(id);
-        if(movie.isPresent()){
-            movieDetails=new MovieDetails(movie.get());
 
-            Integer movieId=movie.get().getId();
-            Double movieRating=ratingService.getAveRatingById(movieId);
-            movieDetails.setRating(movieRating);
-        }
-        return movieDetails;
-    }
-
-    @GetMapping(value = "/list")
-    public PageEntity getMovieList(@RequestParam(value = "pageIndex") Integer pageIndex,
-                                   @RequestParam(value = "pageSize") Integer pageSize){
-        return movieService.getAllMovieList(pageIndex,pageSize);
-    }
+//    @GetMapping(value = "/list")
+//    public PageEntity getMovieList(@RequestParam(value = "pageIndex") Integer pageIndex,
+//                                   @RequestParam(value = "pageSize") Integer pageSize){
+//        return movieService.getAllMovieList(pageIndex,pageSize);
+//    }
 
     @PostMapping(value = "/save")
     public Movie saveMovie(@RequestParam(value = "title") String title,

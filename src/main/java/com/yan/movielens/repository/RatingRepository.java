@@ -6,16 +6,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface RatingRepository extends JpaRepository<Rating, UserAndMovieKey> {
 
-    /**
-     * 根据电影Id获取评价评分
-     * @param id 电影Id
-     * @return 平均评分
-     */
-    @Query(value = "SELECT AVG(rating) FROM rating WHERE movie_id =?1",nativeQuery = true)
-    Double getAveScoreById(Integer id);
+
+    Optional<Rating> findByKeyUserIdAndKeyImdbId(Integer userId, String imdb_id);
+//    Optional<Rating> findByKeyUserIdAndKeyImdb_id(Integer userId, String imdbId);
+
 
     /**
      * 获取所有电影的平均评分
@@ -28,6 +26,7 @@ public interface RatingRepository extends JpaRepository<Rating, UserAndMovieKey>
      * 获取所有被评分过的电影的Id
      * @return 电影Id列表
      */
+    // 这个留着
     @Query(value = "SELECT DISTINCT movie_id FROM rating",nativeQuery = true)
     List<Integer> getAllRatedMovies();
 

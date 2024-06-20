@@ -1,11 +1,11 @@
 server:
-  port: 8000
+  port: 8001
 spring:
 
   jpa:
     hibernate:
       #更新或创建数据表
-      ddl-auto: update
+      ddl-auto: validate # 啊啊啊别更新
     #决定对数据库的SQL操作是否显示到控制台
     show-sql: false
 

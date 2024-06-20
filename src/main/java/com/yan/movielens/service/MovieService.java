@@ -28,12 +28,6 @@ public interface MovieService {
     PageEntity getAllMovieList(Integer pageIndex, Integer pageSize);
 
 
-    /**
-     * 查询热门电影列表
-     * @param num 需要前几的热门电影
-     * @return 电影列表
-     */
-    List<MovieDetails> getHotMovieDetailsList(Integer num);
 
     /**
      * 根据id查询电影基本信息
