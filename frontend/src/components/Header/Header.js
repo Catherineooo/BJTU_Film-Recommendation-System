@@ -43,7 +43,7 @@ const Header = ({ userDetails, toggleProfileVisible, toggleLoginVisible }) => {
 
   const handleFav = () => {
     if (user) {
-      navigate('/favourite');
+      navigate('/rating');
     } else {
       toggleLoginVisible();
     }

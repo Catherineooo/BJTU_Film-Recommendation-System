@@ -72,7 +72,7 @@ function App() {
         <Route path="/movie/:obj/:id" element={<MovieDetails user={ user } toggleLoginVisible={toggleLoginVisible} />} />
         <Route path="/search" element={<SearchResults />} />
         <Route path="/movies/:type/:id" element={<MovieLists />} />
-        <Route path="/favourite" element={<Favourite userDetail={ user } />} />
+        <Route path="/rating" element={<Favourite userDetail={ user } />} />
       </Routes>
       <Footer />
       <BackToTop />
