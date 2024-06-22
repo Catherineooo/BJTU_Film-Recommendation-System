@@ -23,6 +23,7 @@ public class Rating implements Serializable {
 
     @Column(name = "movie", columnDefinition = "bigint")
     private String movie;
+
     public Rating() {}
 
     public Rating(Integer userId, String imdbId, Double rating, Long timeStamp, String movie) {

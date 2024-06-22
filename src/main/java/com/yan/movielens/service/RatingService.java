@@ -11,11 +11,6 @@ import java.util.Optional;
 
 public interface RatingService {
 
-    /**
-     * 获取所有被评价过的电影列表
-     * @return 电影Id列表
-     */
-    List<Integer> getAllRatedMovies();
 
     void deleteRating(Rating rating);
     /**

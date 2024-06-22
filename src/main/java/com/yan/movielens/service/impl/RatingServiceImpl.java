@@ -50,10 +50,6 @@ public class RatingServiceImpl implements RatingService {
     }
     // 查找记录
 
-    @Override
-    public List<Integer> getAllRatedMovies() {
-        return ratingRepository.getAllRatedMovies();
-    }
 
     @Override
     public Optional<Rating> getRating(Integer userId, String imdbId ) {//Integer movieId

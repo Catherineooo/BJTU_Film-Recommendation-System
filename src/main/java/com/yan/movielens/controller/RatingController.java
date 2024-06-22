@@ -69,6 +69,7 @@ public class RatingController {
         key.setUserId(userId);
         key.setImdbId(imdbId);
         rating_record.setKey(key);
+
         rating_record.setMovie(movie);
         rating_record.setRating(rating);
         rating_record.setTimeStamp(timeStamp);

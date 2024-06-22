@@ -1,5 +1,5 @@
 server:
-  port: 8001
+  port: 8000
 spring:
 
   jpa:
@@ -13,6 +13,8 @@ spring:
     username: root
     password: 29b04a92fb1a47f6
     url: jdbc:mysql://47.94.12.125:3306/movie_web?serverTimezone=UTC
+
+
 #    username: root
 #    password: 123456
 #    url: jdbc:mysql://:3306/movie_web?serverTimezone=UTC
