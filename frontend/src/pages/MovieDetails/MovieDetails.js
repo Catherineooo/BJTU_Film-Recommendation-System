@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchMovieDetails, similarMovies, fetchTvDetails, fetchMovies, fetchTv, fetchReviews, fetchVideos } from '../../api';
+import { fetchMovieDetails, similarMovies, fetchTvDetails, fetchMovies, fetchTv, fetchReviews, fetchVideos, fetchRecommends } from '../../api';
 import SideMovieCard from '../../components/SideMovieCard/SideMovieCard'
 import ReviewCard from '../../components/ReviewCard/ReviewCard';
 import FavCard from '../../components/FavCard/FavCard';
 import Loader from '../../components/Loader/Loader';
 import { AiOutlineBarChart, AiOutlinePlayCircle, AiOutlineComment } from "react-icons/ai";
 import './MovieDetails.css';
+import axios from 'axios';
 
 const MovieDetails = ({ user, toggleLoginVisible }) => {
   const { obj, id } = useParams();
@@ -33,13 +34,21 @@ const MovieDetails = ({ user, toggleLoginVisible }) => {
     const fetchDetails = async () => {
       try {
         if (id === 'movie') {
-          const [movieDetails, recommendedMovies] = await Promise.all([
-            fetchMovieDetails(obj),
-            similarMovies('movie', obj),
-          ]);
+          // const [movieDetails, recommendedMovies] = await Promise.all([
+          //   fetchMovieDetails(obj),
+          //   similarMovies('movie', obj),
+          // ]);
+          const movieDetails = await fetchMovieDetails(obj);
+          let response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/similar/getSimilar`, {
+            params: { 
+              tmdbId: movieDetails.id,
+              num: 20
+            }
+          });
+          const recommendedMovies = await fetchRecommends(response.data.data.movies, 20);
           console.log('movieDetails:', movieDetails, 'recommendedMovies:', recommendedMovies)
           setMovie(movieDetails);
-          setRecommend(recommendedMovies.length !== 0 ? recommendedMovies : await fetchMovies('popular'));
+          setRecommend(recommendedMovies.length !== 0 ? recommendedMovies : await similarMovies('movie', obj));
           setGenre(movieDetails.genres ? movieDetails.genres.map(genre => genre.name) : []);
         } else {
           const [tvDetails, recommendedTv] = await Promise.all([
