@@ -1,40 +1,84 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { fetchMovies, fetchTv } from '../../api';
+import { fetchMovies, fetchTv, fetchRecommends } from '../../api';
 import MovieCard from '../../components/MovieCard/MovieCard';
 import Backdrop from '../../components/Backdrop/backdrop';
 import { AiOutlineRight } from "react-icons/ai";
 import { useMediaQuery } from 'react-responsive';
 import './Home.css';
+import axios from 'axios';
 
-const Home = () => {
+const Home = ({ user }) => {
+  const [userRecommend, setUserRecommend] = useState([]);
   const [popularMovies, setPopularMovies] = useState([]);
   const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [tvShows, setTvShows] = useState([]);
   const [topRatedTvShows, setTopRatedTvShows] = useState([]);
+  const [loadingRecommend, setLoadingRecommend] = useState(true);
   const break1275 = useMediaQuery({ maxWidth: 1275 });
 
   useEffect(() => {
+    const getUserRecommend = async () => {
+      if (!user) return;
+      try {
+        const token = localStorage.getItem('token');
+        let response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/recommend/getRecommend`, {
+          params: { 
+            userId: user.id,
+            token: token
+          }
+        });
+        const recommendedMovies = await fetchRecommends(response.data.data.movies, 5);
+        setUserRecommend(recommendedMovies);
+      } catch (err) {
+        console.error('Error getting user recommend:', err);
+      } finally {
+        setLoadingRecommend(false);
+      }
+    };
+
     const fetchAllMovies = async () => {
       try {
-        setPopularMovies(await fetchMovies('popular'));
-        setUpcomingMovies(await fetchMovies('upcoming'));
-        setTvShows(await fetchTv('popular'));
-        setTopRatedTvShows(await fetchTv('top_rated'));
-      } catch {
+        const popular = await fetchMovies('popular');
+        const upcoming = await fetchMovies('upcoming');
+        const tv = await fetchTv('popular');
+        const topRatedTv = await fetchTv('top_rated');
+        setPopularMovies(popular);
+        setUpcomingMovies(upcoming);
+        setTvShows(tv);
+        setTopRatedTvShows(topRatedTv);
+      } catch (err) {
+        console.error('Error fetching movies:', err);
         setPopularMovies([1, 2, 3]);
         setUpcomingMovies(['failed']);
         setTvShows([]);
         setTopRatedTvShows([]);
       }
     };
+
+    getUserRecommend();
     fetchAllMovies();
-  }, []);
+  }, [user]);
 
   return (
     <div className="home-div">
       {popularMovies && (
         <Backdrop popularMovies={popularMovies} />
+      )}
+      {user && !loadingRecommend && userRecommend.length !== 0 && (
+        <div className='movie-section'>
+          <div className='section-header'>
+            <h2>为您推荐</h2>
+            <Link to={`/movies/${'recommend'}/${'movie'}`} className='more-link' >
+              <button className='more-btn'>More <AiOutlineRight className='right-icon' /></button>
+            </Link>
+          </div>
+          <div className="movie-container">
+            <div className="movie-list">
+              {userRecommend.slice(0, break1275 ? 4 : 5).map(movie => <MovieCard key={movie.id} movie={movie} id={'movie'} />)}
+            </div>
+          </div>
+        </div>
       )}
       <div className='movie-section' >
         <div className='section-header'>

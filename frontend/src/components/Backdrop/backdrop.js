@@ -16,7 +16,7 @@ const Backdrop = ({ popularMovies }) => {
 
     if (!popularMovies[0]) return <Loader />;
 
-    console.log(popularMovies[0])
+    // console.log(popularMovies[0])
 
     return (
         <>

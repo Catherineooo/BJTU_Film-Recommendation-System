@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
-import { fetchMovies, fetchTv } from "../../api";
+import { fetchMovies, fetchTv, fetchRecommends } from "../../api";
 import MovieCard from "../../components/MovieCard/MovieCard";
 import './MovieLists.css';
+import axios from "axios";
 
-const MovieLists = () => {
+const MovieLists = ({ user }) => {
     const { type, id } = useParams();
     const [movies, setMovies] = useState([]);
     const [section, setSection] = useState('');
@@ -12,7 +13,18 @@ const MovieLists = () => {
     useEffect(() => {
         const fetchAllMovies = async () => {
             try {
-                if (id === 'movie') {
+                if (type === 'recommend') {
+                    const token = localStorage.getItem('token');
+                    let response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/recommend/getRecommend`, {
+                        params: { 
+                            userId: user.id,
+                            token: token
+                        }
+                    });
+                    const recommendedMovies = await fetchRecommends(response.data.data.movies, 20);
+                    setMovies(recommendedMovies);
+                    setSection('为您推荐');
+                } else if (id === 'movie') {
                     setMovies(await fetchMovies(type));
                     if (type === 'popular') {
                         setSection('热门电影');
@@ -27,13 +39,14 @@ const MovieLists = () => {
                         setSection('高分电视剧');
                     }
                 }
-            } catch {
+            } catch (e) {
+                console.error('Error fetching movies:', e);
                 setMovies([]);
             }
         }
 
         fetchAllMovies();
-    }, [id, type]);
+    }, [id, type, user]);
 
     return (
         <div className="home-div">

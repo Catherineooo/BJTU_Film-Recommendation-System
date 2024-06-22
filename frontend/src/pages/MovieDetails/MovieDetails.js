@@ -37,6 +37,7 @@ const MovieDetails = ({ user, toggleLoginVisible }) => {
             fetchMovieDetails(obj),
             similarMovies('movie', obj),
           ]);
+          console.log('movieDetails:', movieDetails, 'recommendedMovies:', recommendedMovies)
           setMovie(movieDetails);
           setRecommend(recommendedMovies.length !== 0 ? recommendedMovies : await fetchMovies('popular'));
           setGenre(movieDetails.genres ? movieDetails.genres.map(genre => genre.name) : []);

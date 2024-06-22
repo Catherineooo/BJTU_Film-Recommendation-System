@@ -47,3 +47,37 @@ export const fetchIMDBMovie = async (id) => {
   const response = await axios.get(`${BASE_URL}/find/${id}?api_key=${API_KEY}&external_source=imdb_id`);
   return response.data;
 }
+
+// export const fetchRecommends = async (moiveList, count) => {
+//   let movieInfoList = [];
+//   if (count > moiveList.length) count = moiveList.length;
+//   moiveList.slice(0, count).forEach(async (movie_id) => {
+//     const response = await axios.get(`${BASE_URL}/movie/${movie_id}?api_key=${API_KEY}`);
+//     movieInfoList.push(response.data);
+//   });
+//   console.log('movieInfoList:', movieInfoList);
+//   return movieInfoList;
+// }
+export const fetchRecommends = async (movieList, count) => {
+  let movieInfoList = [];
+  if (count > movieList.length) count = movieList.length;
+
+  const requests = movieList.slice(0, count).map(movie_id => {
+    return axios.get(`${BASE_URL}/movie/${movie_id}?api_key=${API_KEY}`);
+  });
+
+  try {
+    const responses = await axios.all(requests);
+    movieInfoList = responses.map(response => response.data);
+  } catch (error) {
+    console.error('Error fetching movie information:', error);
+  }
+
+  console.log('movieInfoList:', movieInfoList);
+  return movieInfoList;
+};
+
+export const fetchRecommend = async (id) => {
+  const response = await axios.get(`${BASE_URL}/movie/${id}?api_key=${API_KEY}`);
+  return response.data;
+}
